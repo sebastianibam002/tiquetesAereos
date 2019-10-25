@@ -13,11 +13,16 @@ class Cliente():
 		self.numeroSerial = self.generadorNumeroSerial(numeroSerial)
 	def generadorNumeroSerial(self, pNumeroSerial):
 		#se abre el archivo de texto con todos los numeros seriales
-		with open("NumerosSeriales.txt", "a+") as Archivo:
+		with open("NumerosSeriales.txt", "+r") as Archivo:
 			for a in Archivo:
 				if pNumeroSerial <= int(a):
 					pNumeroSerial = int(a)+1
-			Archivo.write(str(pNumeroSerial)+ "\n")
+
+			Archivo.close()
+			r = open("NumerosSeriales.txt", "a")
+			r.write(str(pNumeroSerial)+ "\n")
+			r.close()
+			
 		return pNumeroSerial
 
 	def __str__(self):
