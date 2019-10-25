@@ -45,10 +45,10 @@ class Cliente():
 ciudadOrigen = ""
 ciudadDestino = ""
 
-fechaDeSalida = raw_input("Introduzca la fecha de salida ej:2019-10-25: ")
+fechaDeSalida = input("Introduzca la fecha de salida ej:2019-10-25: ")
 numeroDePasajeros = int(input("Numero de Pasajeros: "))
-ciudadDeOrigen = raw_input("Ciudad de Origen: ")
-ciudadDestino = raw_input("Ciudad Destino: ")
+ciudadDeOrigen = input("Ciudad de Origen: ")
+ciudadDestino = input("Ciudad Destino: ")
 
 cliente1 = Cliente("juan", "correo")
 cliente1.solicitarVuelo(ciudadDeOrigen, ciudadDestino,fechaDeSalida, numeroDePasajeros )
