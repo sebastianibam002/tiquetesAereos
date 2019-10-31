@@ -5,7 +5,7 @@ posiblesCiudades = {"Arequipa": "AQP", "Barranquilla": "BAQ", "Bogota": "BOG", "
 
 def buscarEnCiudad(pCiudad):
 
-    #se introduce como parametreo la ciudas y se evalua con este metodo si existe
+    #se introduce como parametreo la ciudad y se evalua con este metodo si existe
     encontrado = False
 
     for a in posiblesCiudades.keys():
