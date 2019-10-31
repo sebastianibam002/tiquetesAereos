@@ -25,6 +25,34 @@ toolbar = NavigationToolbar2Tk (canvas, root) #---------------------------------
 toolbar.update()
 canvas.get_tk_widget().pack(side= tk.TOP, fill=tk.BOTH, expand = 1) # Se expande de acuerdo al tamaño de la ventana-------# Ubicación
 
+####################################### Cuadro ###############################################
+
+cuadro = tk.Frame (root,bg = "#33d7ff")
+cuadro.pack(side= tk.TOP, fill=tk.BOTH, expand = 1)
+
+####################################### Entradas #############################################
+
+entrada_origen = tk.Entry (cuadro)
+entrada_origen.place(relx = 0.65, rely = 0.1, relwidth = 0.25, relheight = 0.2 )
+
+entrada_destino = tk.Entry (cuadro)
+entrada_destino.place(relx = 0.65, rely = 0.4, relwidth = 0.25, relheight = 0.2)
+
+entrada = tk.Entry (cuadro)
+entrada.place(relx = 0.65, rely = 0.7, relwidth = 0.25, relheight = 0.2)
+
+##################################### Etiquetas ##############################################
+
+label_origen = tk.Label(cuadro, text = "Ciudad de origen" )
+label_origen.place(relx = 0.1, rely = 0.1, relwidth = 0.5, relheight = 0.2)
+
+label_destino = tk.Label(cuadro, text = "Ciudad Derstino")
+label_destino.place(relx = 0.1, rely = 0.4, relwidth = 0.5, relheight = 0.2)
+
+label_extra = tk.Label(cuadro, text = "Extra")
+label_extra.place(relx = 0.1, rely = 0.7, relwidth = 0.5, relheight = 0.2)
+
+
 ######################################## Botón ##############################################
 
 """Se define la funcion que cierra la ventana para luego vincularla a el botón 'Salir' """
