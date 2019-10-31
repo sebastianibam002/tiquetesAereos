@@ -38,8 +38,8 @@ entrada_origen.place(relx = 0.65, rely = 0.1, relwidth = 0.25, relheight = 0.2 )
 entrada_destino = tk.Entry (cuadro)
 entrada_destino.place(relx = 0.65, rely = 0.4, relwidth = 0.25, relheight = 0.2)
 
-entrada = tk.Entry (cuadro)
-entrada.place(relx = 0.65, rely = 0.7, relwidth = 0.25, relheight = 0.2)
+entrada_fecha = tk.Entry (cuadro)
+entrada_fecha.place(relx = 0.65, rely = 0.7, relwidth = 0.25, relheight = 0.2)
 
 ##################################### Etiquetas ##############################################
 
@@ -49,8 +49,8 @@ label_origen.place(relx = 0.1, rely = 0.1, relwidth = 0.5, relheight = 0.2)
 label_destino = tk.Label(cuadro, text = "Ciudad Derstino")
 label_destino.place(relx = 0.1, rely = 0.4, relwidth = 0.5, relheight = 0.2)
 
-label_extra = tk.Label(cuadro, text = "Extra")
-label_extra.place(relx = 0.1, rely = 0.7, relwidth = 0.5, relheight = 0.2)
+label_fecha = tk.Label(cuadro, text = "Fecha (AAAA-MM-DD)")
+label_fecha.place(relx = 0.1, rely = 0.7, relwidth = 0.5, relheight = 0.2)
 
 
 ######################################## Botón ##############################################
