@@ -59,13 +59,17 @@ ciudadOrigen = ""
 ciudadDestino = ""
 
 #Parte para hacer pruebas con valores introducidos directamente en la consola
-nombreCliente = input("Introduzca su nombre: ")
-correoCliente = input("Inntroduzca su correo: ")
-fechaDeSalida = input("Introduzca la fecha de salida ej:2019-10-25: ")
-numeroDePasajeros = int(input("Numero de Pasajeros: "))
-ciudadDeOrigen = input("Ciudad de Origen: ")
-ciudadDestino = input("Ciudad Destino: ")
+
+#nombreCliente = input("Introduzca su nombre: ")
+#correoCliente = input("Inntroduzca su correo: ")
+#fechaDeSalida = input("Introduzca la fecha de salida ej:2019-10-25: ")
+#numeroDePasajeros = int(input("Numero de Pasajeros: "))
+#ciudadDeOrigen = input("Ciudad de Origen: ")
+#ciudadDestino = input("Ciudad Destino: ")
+
+
 #Parte para hacer pruebas con valores introducidos directamente en la interfaz
+
 nombreCliente = Interfaz.entrada_nombre
 correoCliente = Interfaz.entrada_correo
 fechaDeSalida = Interfaz.entrada_fecha
