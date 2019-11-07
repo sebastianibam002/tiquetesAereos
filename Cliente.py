@@ -2,7 +2,7 @@
 
 import checkAvailability
 import WebScrappingSelenium
-
+import Interfaz
 
 #voy a crear una clase con el usuario que quiere obtener esta informacion y que se alamacene en su propio archivo para ser un poco mas organizado
 
@@ -51,11 +51,6 @@ class Cliente():
 		else:
 			print("Ocurrio un error con el link")
 			
-	
-		
-		
-		
-
 
 
 
@@ -70,6 +65,13 @@ fechaDeSalida = input("Introduzca la fecha de salida ej:2019-10-25: ")
 numeroDePasajeros = int(input("Numero de Pasajeros: "))
 ciudadDeOrigen = input("Ciudad de Origen: ")
 ciudadDestino = input("Ciudad Destino: ")
+#Parte para hacer pruebas con valores introducidos directamente en la interfaz
+nombreCliente = Interfaz.entrada_nombre
+correoCliente = Interfaz.entrada_correo
+fechaDeSalida = Interfaz.entrada_fecha
+numeroDePasajeros = Interfaz.entrada_pasajeros
+ciudadDeOrigen = Interfaz.entrada_origen
+ciudadDestino = Interfaz.entrada_destino
 
 cliente1 = Cliente(nombreCliente, correoCliente)
 cliente1.solicitarVuelo(ciudadDeOrigen, ciudadDestino,fechaDeSalida, numeroDePasajeros )
