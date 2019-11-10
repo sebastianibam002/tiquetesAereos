@@ -47,126 +47,101 @@ def AlmacenarTexto(pUrl, pNumeroCliente):
 	with open(nombreTexto, "w") as texto:
 		texto.write(webScrapping(pUrl))
 
+
+def limpiarTexto(pString):
+
+
+    pString= pString.replace("\n", "")
+    pString = pString.replace(">", "")
+    pString = pString.replace("          ", "")
+    pString = pString.replace(" ", "")
+    return pString
+
+
 def BuscadorTexto(pNumeroCliente, pStringBusqueda):
-	"""
-	nombreTexto = str(pNumeroCliente) + ".txt"
+   
 
-	with open(nombreTexto, "r") as texto:
-		contadorLineas = 0
-		listaLineas = []
-		lineasTexto = []
-		listaPrecios = []
-		for line in texto:
-		
-			contadorLineas += 1
-			lineasTexto.append(line)
-			if pStringBusqueda in line:
-				print(line)
-				listaLineas.append(contadorLineas)
-				
-				
-		#ahora voy a leer el texto patra poder acceder a los elemntetos de este como si fuera una lista de elementos
-		
-		#Esta parte esta hecha para quitarles los saltos de linea y los espacios de mas
-		for elementos in listaLineas:
-			ElementoLista = lineasTexto[elementos].lstrip()
-			ElementoLista = ElementoLista.replace("\n", "")
-			listaPrecios.append(ElementoLista)
-
-		return listaPrecios
-
-	"""
-
-	nombreTexto = str(pNumeroCliente) + ".txt"
-	
-
-	Archivo = open(nombreTexto, "r")
-
-	texto = Archivo.read()
+    archivo  = open (str(pNumeroCliente) + ".txt", "r")
+    textoArchivo = archivo.read()
+    lsIndicesI = []
+    lsIndicesF = []
+    lsPrecios = []
+    contador = 0
+    
+    encontrado = True
 
 
-	if pStringBusqueda == "from-price":
+    if pStringBusqueda == "from-price":
+        
+        consLenPString = pStringBusqueda.__len__()
 
-	
-		encontrado = True
+        lsIndicesI.append(textoArchivo.find(pStringBusqueda) + consLenPString)
+        lsIndicesF.append(textoArchivo.find("<",  lsIndicesI[0]))
+    
+        
+    
+        while encontrado:
+            if textoArchivo.find(pStringBusqueda, lsIndicesI[contador] + consLenPString) != -1:
 
-		contador = 0
-		numeroEncontrados = 0
-		listaPrecios = []
-		listaIndices = []
+                lsIndicesI.append(textoArchivo.find(pStringBusqueda, lsIndicesI[contador]) + consLenPString)
+                lsIndicesF.append(textoArchivo.find("<", lsIndicesI[contador + 1]))
+                contador += 1
 
-		listaIndices.append(texto.find(pStringBusqueda))
+                #lsPrecios.append(textoArchivo[lsIndicesI[contador] + 2: lsIndicesF[contador]])
 
+            else:
 
+                #se ejecuta cuando no hay mas precios
+                break
+        
+        contador2 = 0
+        for a in lsIndicesI:
+            lsPrecios.append(textoArchivo[a + 2: lsIndicesF[contador2]])
+            contador2 += 1
 
-		while encontrado:
+   
+        
+        return lsPrecios
 
-			if texto.find(pStringBusqueda, listaIndices[contador] + 10) != -1:
+    else:
 
-				listaIndices.append(texto.find(pStringBusqueda, listaIndices[contador] + 10))
-				contador+= 1
+        consLenPString = pStringBusqueda.__len__()
 
-			else:
+        lsIndicesI.append(textoArchivo.find(pStringBusqueda) + consLenPString)
+        lsIndicesF.append(textoArchivo.find("<",  lsIndicesI[0]))
+    
+    
+
+    
+        while encontrado:
+            if textoArchivo.find(pStringBusqueda, lsIndicesI[contador] + consLenPString) != -1:
+
+                lsIndicesI.append(textoArchivo.find(pStringBusqueda, lsIndicesI[contador]) + consLenPString)
+                lsIndicesF.append(textoArchivo.find("<", lsIndicesI[contador + 1]))
+                
+
+                #lsPrecios.append(textoArchivo[lsIndicesI[contador] + 2: lsIndicesF[contador]])
+                contador += 1
+            else:
+
+                #se ejecuta cuando no hay mas precios
+                break
+    
+        contador2 = 0
+        texto = ""
+        for a in lsIndicesI:
             
-				encontrado = False
-
-
-
-		#ya tengo una lista con los indices donde se encuentran los precios, entonces ahora voy a buscarlo y crear una lista con los respecitos precios
-
-		for a in listaIndices:
-			#esos numeros es el tamano de la palabra
-			listaPrecios.append(texto[a + 12: a + 23])
-
-	else:
-
-		encontrado = True
-
-		contador = 0
-		numeroEncontrados = 0
-		listaPrecios = []
-		listaIndices = []
-
-		listaIndices.append(texto.find(pStringBusqueda))
-
-
-
-		while encontrado:
-
-			if texto.find(pStringBusqueda, listaIndices[contador] + 11) != -1:
-
-				listaIndices.append(texto.find(pStringBusqueda, listaIndices[contador] + 11))
-				contador+= 1
-
-			else:
+            texto = textoArchivo[a: lsIndicesF[contador2]]
+            lsPrecios.append(limpiarTexto(texto))
+            #lsPrecios.append(textoArchivo[a: lsIndicesF[contador2]])
+            contador2 += 1
             
-				encontrado = False
+    
+        return lsPrecios
 
 
 
-		#ya tengo una lista con los indices donde se encuentran los precios, entonces ahora voy a buscarlo y crear una lista con los resppecto al timepo aunque hay que quitarle los espacios primero
-
-		textoVacio = ""
-
-		for a in listaIndices:
-			#esos numeros es el tamano de la palabra
-			textoVacio = texto[a : a + 31]
-			textoVacio = textoVacio.replace("class=\"time\">", "")
-			textoVacio = textoVacio.replace("\n", "")
-			textoVacio = textoVacio.replace("          ", "")
-			textoVacio = textoVacio.replace("</div></div>", "")
-			textoVacio = textoVacio.replace(" ", "")
-
-
-
-
-
-			listaPrecios.append(textoVacio)
-		
-
-	Archivo.close()
-
-	return listaPrecios
+    archivo.close()
 
 def organizadorFechaPrecio(pNumeroCliente):
 		
@@ -179,7 +154,7 @@ def organizadorFechaPrecio(pNumeroCliente):
 			if a in diccionarioPrecios.keys():
 				a = str(contador) + a
 			try:
-				diccionarioPrecios[a] = [ListaTiempos[contador], ListaTiempos[contador +1]]
+				diccionarioPrecios[a] = [ListaTiempos[contador * 2], ListaTiempos[(contador*2) +1]]
 				contador += 1
 
 			except:
@@ -217,7 +192,7 @@ BuscadorTexto(2, "<div class=\"time\"")
 
 """
 
-#print(organizadorFechaPrecio(17))
+#print(organizadorFechaPrecio(25))
 
 
 
