@@ -1,48 +1,27 @@
-#from selenium import webdriver
-from bs4 import BeautifulSoup
+import time
 from requests_html import HTMLSession
 
 
 
 
 def webScrapping (pUrl):
-	"""
+	#requiere como parametro un url y retorna el codigo html de este url
 
-	TODO: cambiar la libreeria Selenium por requets_tml ya la descarhgue con pip
-
-	
-
-	url = pUrl
-	# create a new Firefox session
-	driver = webdriver.Firefox(executable_path="/home/sebastian/Downloads/gecko/geckodriver", log_path="/home/sebastian/Downloads/gecko/geckodriver.log")
-	driver.implicitly_wait(30)
-	driver.get(url)
-
-	#python_button = driver.find_element_by_id('day selected') #FHSU
-	#python_button.click()
-
-	soup= BeautifulSoup(driver.page_source, 'lxml')
-
-	js = soup.find("div", class_="from-price")
+	try:
+		session = HTMLSession()
+		resp = session.get(pUrl)
+		resp.html.render()
+		return resp.html.html
+	except:
+		print("Revisar Conexion")
 	
 	
-	return soup.prettify()
-
-	"""
-	session = HTMLSession()
-	resp = session.get(pUrl)
-	resp.html.render()
 	
-	#soup = BeautifulSoup(resp.html.html, 'lxml')
+
+
+def AlmacenarTexto(pUrl, pNombreCiudad):
 	
-	return resp.html.html
-
-	#Para que este codigo funcione hay que hacer un tema con el PATH de Firefox y tener instalado Selsnium
-	#Lo que hace es buscar todas las etiquetas from-price
-
-def AlmacenarTexto(pUrl, pNumeroCliente):
-	#nombreTexto = "/home/sebastian/Documents/Soups/" + str(pNumeroCliente) + ".txt"
-	nombreTexto = str(pNumeroCliente) + ".txt"
+	nombreTexto = pNombreCiudad + ".txt"
 
 	with open(nombreTexto, "w") as texto:
 		texto.write(webScrapping(pUrl))
@@ -58,10 +37,10 @@ def limpiarTexto(pString):
     return pString
 
 
-def BuscadorTexto(pNumeroCliente, pStringBusqueda):
+def BuscadorTexto(pNombreCiudad, pStringBusqueda):
    
 
-    archivo  = open (str(pNumeroCliente) + ".txt", "r")
+    archivo  = open (str(pNombreCiudad) + ".txt", "r")
     textoArchivo = archivo.read()
     lsIndicesI = []
     lsIndicesF = []
@@ -120,7 +99,7 @@ def BuscadorTexto(pNumeroCliente, pStringBusqueda):
                 lsIndicesF.append(textoArchivo.find("<", lsIndicesI[contador + 1]))
                 
 
-                #lsPrecios.append(textoArchivo[lsIndicesI[contador] + 2: lsIndicesF[contador]])
+                
                 contador += 1
             else:
 
@@ -133,7 +112,7 @@ def BuscadorTexto(pNumeroCliente, pStringBusqueda):
             
             texto = textoArchivo[a: lsIndicesF[contador2]]
             lsPrecios.append(limpiarTexto(texto))
-            #lsPrecios.append(textoArchivo[a: lsIndicesF[contador2]])
+            
             contador2 += 1
             
     
@@ -143,13 +122,13 @@ def BuscadorTexto(pNumeroCliente, pStringBusqueda):
 
     archivo.close()
 
-def organizadorFechaPrecio(pNumeroCliente):
+def organizadorFechaPrecio(pNombreCiudad):
 		
-		ListaTiempos = BuscadorTexto(pNumeroCliente, "class=\"time\"")
+		ListaTiempos = BuscadorTexto(pNombreCiudad, "class=\"time\"")
 		contador = 0
 		diccionarioPrecios = {}
 		
-		for a in BuscadorTexto(pNumeroCliente, "from-price"):
+		for a in BuscadorTexto(pNombreCiudad, "from-price"):
 			
 			if a in diccionarioPrecios.keys():
 				a = str(contador) + a
@@ -159,20 +138,20 @@ def organizadorFechaPrecio(pNumeroCliente):
 
 			except:
 				
-				print("Error la pagina no cargo de forma correcta")
+				print("ErrorI")
 				break
 
 
 		return diccionarioPrecios
 
-def almacenarHorasPrecios(pDiccionarioHorasPrecios):
+def almacenarHorasPrecios(pDiccionarioHorasPrecios, pCiudad):
 	
 
 	#Se alamacena el valor dado en un documento especifico, no retorna nada
 	msg = ""
-	with open("textoTabulacion.txt", "a+") as archivo:
+	with open("Resultados" + pCiudad + ".txt", "a+") as archivo:
 
-		msg = str(pDiccionarioHorasPrecios) + "\n ********************************************** \n"
+		msg = str(pDiccionarioHorasPrecios) + time.ctime() +"\n ********************************************** \n" 
 		archivo.write(msg)
 	
 	
@@ -184,15 +163,8 @@ def almacenarHorasPrecios(pDiccionarioHorasPrecios):
 	
 	
 
-"""
-ZONA DE PRUEBAS	
-AlmacenarTexto("https://www.vivaair.com/co/es/vuelo?DepartureCity=BOG&ArrivalCity=MDE&DepartureDate=2019-10-26&Adults=1&Currency=COP", 2)
-#"<div class=\"from-price\""
-BuscadorTexto(2, "<div class=\"time\"")
 
-"""
 
-#print(organizadorFechaPrecio(25))
 
 
 
