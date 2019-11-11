@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def limpiarTextoHora(pTexto):
+def limpiarTextoHora(pTexto):  # Se eliminan los caracteres innecesarios
 	hora = pTexto.split(",")
 	msg = hora[0]
 	msg = msg.replace("[", "")
@@ -8,12 +8,13 @@ def limpiarTextoHora(pTexto):
 	msg = msg.replace(" ", "")
 	return msg
 
-def limpiadorPrecio(pTexto):
+def limpiadorPrecio(pTexto):  # Se eliminan los caracteres innecesarios
 	listaEliminar = ["{", "\'", "COP", "OP", " ", ","]
 	for a in listaEliminar:
 		pTexto = pTexto.replace(a, "")
 
 	return pTexto
+
 def convertirToPalabra(pLista):
 
 	word = ""
@@ -48,7 +49,7 @@ def catalogador(pHora):
 def creadorEjex(pLista):
 	
 	listaEjex = []
-	#En el eje x se cataloga la hora entre manana, medio dia y tarde
+	# En el eje X se cataloga la hora entre manana, medio dia y tarde
 	contador = 0
 	for lista in pLista:
 		for a in lista:
@@ -60,7 +61,7 @@ def creadorEjex(pLista):
 
 def creadorEjey(pLista):
 	listaEjey = []
-	#en el eje y se encuentran los precios
+	# En el eje Y se encuentran los precios
 	contador = 0
 	for lista in pLista:
 		for a in lista:
