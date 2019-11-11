@@ -1,6 +1,19 @@
 import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
+import TranformarPuntos 
+
+
+listaXBaq, listaYBaq = TranformarPuntos.main("ResultadosBAQ.txt")
+listaXCuz, listaYCuz = TranformarPuntos.main("ResultadosCUZ.txt")
+listaXCtg, listaYCtg = TranformarPuntos.main("ResultadosCTG.txt")
+listaXBga, listaYBga = TranformarPuntos.main("ResultadosBGA.txt")
+listaXAdz, listaYAdz = TranformarPuntos.main("ResultadosADZ.txt")
+listaXSmr, listaYSmr = TranformarPuntos.main("ResultadosSMR.txt")
+listaXVup, listaYVup = TranformarPuntos.main("ResultadosVUP.txt")
+
+
+
 ########################################## Ventana ###########################################
 
 """ Se crea la ventana con su respectivo titulo """
@@ -17,33 +30,34 @@ plot = figure.add_subplot(1, 1, 1) # Proporción
 
 """ Datos del grafico"""
 
+
 # Barranquilla
-x1 = [ 1,8,6,4,7,5,3,1,4,8,9,10 ]
-y1 = [ 6,5,8,4,1,3,12,9,7,1,4,6 ]
+
+x1 = listaXBaq
+y1 = listaYBaq
 
 # Cusco
-x2 = [5,9,6,3,12,8,1]
-y2 = [9,7,1,8,6,3,9]
+x2 = listaXCuz
+y2 = listaYCuz
 
 # Cartagena
-x3 = [10,8,6,3,7,5 ]
-y3 = [ 6,9,5,3,12,9,]
+x3 = listaXCtg
+y3 = listaYCtg
 
 # Bucaramanga
-x4 = [ 9,5,1,7,6,3,13 ]
-y4 = [ 2,11,6,3,7,6,10 ]
+x4 = listaXBga
+y4 = listaYBga
 
 # San Andrés
-x5 = [ 3,3,1,2,9,13 ]
-y5 = [11,12,9,7,3,4 ]
+x5 = listaXAdz
+y5 = listaYAdz
 
 # Santa Marta
-x6 = [ 6,4,8,5,10,11 ]
-y6 = [ 6,3,5,1,7,8 ]
-
+x6 = listaXSmr
+y6 = listaYSmr
 # Valledupar
-x7 = [ 1,8,3,1,7,5,6 ]
-y7 = [ 9,5,1,4,7,8,5 ]
+x7 = listaXVup
+y7 = listaYVup
 
 """ (Coordenadas X, Coordenadas Y, Color del punto, Marcador o tipo de punto, Etiqueta) """
 
