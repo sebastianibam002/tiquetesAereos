@@ -2,10 +2,7 @@ import time
 from requests_html import HTMLSession
 
 
-
-
-def webScrapping (pUrl):
-	#requiere como parametro un url y retorna el codigo html de este url
+def webScrapping (pUrl):  # Requiere como parametro un url y retorna el codigo html de este url
 
 	try:
 		session = HTMLSession()
@@ -16,10 +13,8 @@ def webScrapping (pUrl):
 		print("Revisar Conexion")
 	
 	
-	
 
-
-def AlmacenarTexto(pUrl, pNombreCiudad):
+def AlmacenarTexto(pUrl, pNombreCiudad):  # Se almacena el texto obtenido en un archivo de texto ".txt"
 	
 	nombreTexto = pNombreCiudad + ".txt"
 
@@ -27,8 +22,7 @@ def AlmacenarTexto(pUrl, pNombreCiudad):
 		texto.write(webScrapping(pUrl))
 
 
-def limpiarTexto(pString):
-
+def limpiarTexto(pString):   # Se eliminan los caracteres innecesarios para facilitar la lectura del archivo
 
     pString= pString.replace("\n", "")
     pString = pString.replace(">", "")
@@ -37,9 +31,8 @@ def limpiarTexto(pString):
     return pString
 
 
-def BuscadorTexto(pNombreCiudad, pStringBusqueda):
+def BuscadorTexto(pNombreCiudad, pStringBusqueda):   # Permite la lectura del texto en busca de los precios 
    
-
     archivo  = open (str(pNombreCiudad) + ".txt", "r")
     textoArchivo = archivo.read()
     lsIndicesI = []
@@ -50,7 +43,7 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):
     encontrado = True
 
 
-    if pStringBusqueda == "from-price":
+    if pStringBusqueda == "from-price":			# "from-price" es la palabra anterior a el precio, por eso es el parametro de busqueda
         
         consLenPString = pStringBusqueda.__len__()
 
@@ -70,15 +63,13 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):
 
             else:
 
-                #se ejecuta cuando no hay mas precios
+                # Se ejecuta cuando no hay más precios
                 break
         
         contador2 = 0
         for a in lsIndicesI:
             lsPrecios.append(textoArchivo[a + 2: lsIndicesF[contador2]])
             contador2 += 1
-
-   
         
         return lsPrecios
 
@@ -90,20 +81,16 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):
         lsIndicesF.append(textoArchivo.find("<",  lsIndicesI[0]))
     
     
-
-    
         while encontrado:
             if textoArchivo.find(pStringBusqueda, lsIndicesI[contador] + consLenPString) != -1:
 
                 lsIndicesI.append(textoArchivo.find(pStringBusqueda, lsIndicesI[contador]) + consLenPString)
                 lsIndicesF.append(textoArchivo.find("<", lsIndicesI[contador + 1]))
-                
-
-                
+               
                 contador += 1
             else:
 
-                #se ejecuta cuando no hay mas precios
+                # Se ejecuta cuando no hay más precios
                 break
     
         contador2 = 0
@@ -118,11 +105,10 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):
     
         return lsPrecios
 
-
-
     archivo.close()
+	
 
-def organizadorFechaPrecio(pNombreCiudad):
+def organizadorFechaPrecio(pNombreCiudad):  # Crea un diccionario con las horas y los precios
 		
 		ListaTiempos = BuscadorTexto(pNombreCiudad, "class=\"time\"")
 		contador = 0
@@ -144,27 +130,12 @@ def organizadorFechaPrecio(pNombreCiudad):
 
 		return diccionarioPrecios
 
-def almacenarHorasPrecios(pDiccionarioHorasPrecios, pCiudad):
+def almacenarHorasPrecios(pDiccionarioHorasPrecios, pCiudad):	#Se alamacena el valor dado en un documento especifico, no retorna nada
 	
-
-	#Se alamacena el valor dado en un documento especifico, no retorna nada
 	msg = ""
 	with open("Resultados" + pCiudad + ".txt", "a+") as archivo:
 
 		msg = str(pDiccionarioHorasPrecios) + time.ctime() +"\n ********************************************** \n" 
 		archivo.write(msg)
 	
-	
-	
-
-
-				
-	
-	
-	
-
-
-
-
-
 
