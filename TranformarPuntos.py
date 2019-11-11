@@ -1,6 +1,7 @@
 from datetime import datetime
 
 def limpiarTextoHora(pTexto):
+	#dado un texto de las horas se retorna este sin los caracteres no deseados [" ", "'", "[", ","]
 	hora = pTexto.split(",")
 	msg = hora[0]
 	msg = msg.replace("[", "")
@@ -9,19 +10,21 @@ def limpiarTextoHora(pTexto):
 	return msg
 
 def limpiadorPrecio(pTexto):
+	#dado un texto con los precios se retorna sin los catarres deseados ["{", "\'", "COP", "OP", " ", ","]
 	listaEliminar = ["{", "\'", "COP", "OP", " ", ","]
 	for a in listaEliminar:
 		pTexto = pTexto.replace(a, "")
 
 	return pTexto
 def convertirToPalabra(pLista):
-
+	#dada una lista, retorna la lista como unsa string
 	word = ""
 	for a in pLista:
 		word += a
 
 	return word
 def transformarHora(pHora):
+	#dada una hora, la retorna en formato datetime
 	
 	hora1 = datetime.strptime(pHora + ":00", "%X").time()
 	return hora1
@@ -71,6 +74,7 @@ def creadorEjey(pLista):
 		
 	
 def numCopToCop(pString):
+	#dada una string se remplaza cualquier derivacion de 1,2,3..COP por COP
 	msg = ""
 	for a in range(20):
 		msg = str(a) + "COP"
@@ -81,7 +85,7 @@ def numCopToCop(pString):
 	
 
 def main(pNombre):
-
+	#Dado un nombre de ciudad, se retornan dos listas uno con los precios y otra con las horas 
 	r = open(pNombre, "r")
 	texto = r.readlines()
 	diccionario = {}
