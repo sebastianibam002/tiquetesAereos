@@ -20,15 +20,14 @@ def webScrapping (pUrl):
 
 
 def AlmacenarTexto(pUrl, pNombreCiudad):
-	
+	#crea un archivo de texto con el nombre de la ciudad que se paso por parametro y se guarda en esta el codigo html de la pagina de codigo url
 	nombreTexto = pNombreCiudad + ".txt"
 
 	with open(nombreTexto, "w") as texto:
 		texto.write(webScrapping(pUrl))
 
-
 def limpiarTexto(pString):
-
+    #dado una string, se retorna esta sin los caracteres no deseados 
 
     pString= pString.replace("\n", "")
     pString = pString.replace(">", "")
@@ -38,8 +37,8 @@ def limpiarTexto(pString):
 
 
 def BuscadorTexto(pNombreCiudad, pStringBusqueda):
-   
 
+    #dado un nombre de una ciudad, se procede a abrir este archivo y a buscar en esta una string determinada, retorna una lista con los datos de la string buscada
     archivo  = open (str(pNombreCiudad) + ".txt", "r")
     textoArchivo = archivo.read()
     lsIndicesI = []
@@ -123,7 +122,7 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):
     archivo.close()
 
 def organizadorFechaPrecio(pNombreCiudad):
-		
+		#dado el nombre de una ciudad, abre el archivo con el nombre de esta y retorna un siccionario con los precios de los tiquetes de avion como llaves y las horas como tupla
 		ListaTiempos = BuscadorTexto(pNombreCiudad, "class=\"time\"")
 		contador = 0
 		diccionarioPrecios = {}
@@ -145,7 +144,7 @@ def organizadorFechaPrecio(pNombreCiudad):
 		return diccionarioPrecios
 
 def almacenarHorasPrecios(pDiccionarioHorasPrecios, pCiudad):
-	
+	#genera una archivo de tipo texto si no existe ya (en cuyo caso solo anade) con ewl nombre de la ciudad dada como parametro y no retorna nada
 
 	#Se alamacena el valor dado en un documento especifico, no retorna nada
 	msg = ""
