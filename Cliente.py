@@ -4,11 +4,11 @@ import checkAvailability
 import WebScrappingSelenium
 
 
-# Se crea una clase con el usuario que quiere obtener esta informacion y que se alamacene en su propio archivo para ser un poco mas organizado
+#voy a crear una clase con el usuario que quiere obtener esta informacion y que se alamacene en su propio archivo para ser un poco mas organizado
 
 class Ciudad():
     def __init__(self,pCiudad, numeroSerial= 0):
-	#Se le colocan los atributos de una persona, el correo es un adicional para después
+	#Se le colocan los atributos de una persona, el correo es un adicional para despues
         self.nombre = pCiudad #su propio nombre
         self.prefijo = checkAvailability.generarPrefijo(pCiudad)
 
@@ -30,7 +30,7 @@ class Ciudad():
                     if pNumeroSerial <= int(a):
                         pNumeroSerial = int(a)+1
         except:
-	    #En caso de que no exista se crea uno
+	    #En caso de que no exiat se crea uno
             name = self.prefijo + "NumSerial.txt"
             print(name)
             Archivo = open(name, "w")
@@ -48,7 +48,7 @@ class Ciudad():
         return "mi numero serial {0}".format (self.numeroSerial)
 
     def solicitarVuelo(self, pFechaSalida):
-    #Le permite al usuario poder solocitar un vuelo, con los datos necesarios para este: ciudad de salida, ciudad de destino, la fecha en que se sale (con el siguiente formato 'AAAA-MM-DD') y el numero de pasajeros
+    #Le permite al usuario poder solocitar un vuelo, con los datos necesarios para este: ciudad de salida, ciudad de destino, la fecha en que se sale (con el siguiente formato 'ano-mes-dia') y el numero de pasajeros
         url = checkAvailability.modificacionLink("Bogota", self.nombre , pFechaSalida, 1)
         
 
@@ -70,7 +70,7 @@ class Ciudad():
 
                     return True
             else:
-                print("No hay vuelos disponibles en esas fechas en estas ciudades")
+                print("No hay vuelos disponibles en esas fechas en estos sitios")
 
 			
             
