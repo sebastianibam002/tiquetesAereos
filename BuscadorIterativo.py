@@ -1,7 +1,7 @@
 import time
 import Cliente
 
-#Barranquilla, Cartagena, Bucaramanga, Cusco, San Andres Islas, Santa Marta, Valledup
+# Se establecieron las siguientes ciudades como muestra: Barranquilla, Cartagena, Bucaramanga, Cusco, San Andres Islas, Santa Marta, Valledupar
 
 ciudadesDestino = {"Barranquilla": [0,0], "Cartagena": [0,0], "Bucaramanga": [0,0], "Cusco": [0,0], "San Andres Islas": [0,0], "Santa Marta":[0,0], "Valledupar": [0,0]}
 
@@ -9,10 +9,9 @@ ciudadesDestino = {"Barranquilla": [0,0], "Cartagena": [0,0], "Bucaramanga": [0,
 #ciudadesDestino = {"Barranquilla": [0,0]}
 #las fechas que se quiere revisar
 
-listaFechas = [11,12,13,14]
+listaFechas = [11,12,13,14]   # 11,12,13 y 14 de noviembre de 2019
 
 def repetirTresVeces(pFecha):
-
     
     for a in ciudadesDestino.keys():
 
@@ -36,7 +35,6 @@ def repetirTresVeces(pFecha):
 
 def modificarFecha():
 
-    
     for a in listaFechas:
 
         repetirTresVeces(a)
