@@ -48,7 +48,7 @@ def catalogador(pHora):
 def creadorEjex(pLista):
 	
 	listaEjex = []
-	#En el eje x se cataloga la hora entre manana, medio dia y tard0
+	#En el eje x se cataloga la hora entre manana, medio dia y tarde
 	contador = 0
 	for lista in pLista:
 		for a in lista:
@@ -113,14 +113,5 @@ def main(pNombre):
 
 	
 	return creadorEjex(superLista), creadorEjey(superLista)
-
-	
-	
-
-	
-
-
-						
-			
 		
 	
