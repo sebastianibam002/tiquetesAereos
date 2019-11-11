@@ -2,7 +2,10 @@ import time
 from requests_html import HTMLSession
 
 
-def webScrapping (pUrl):  # Requiere como parametro un url y retorna el codigo html de este url
+
+
+def webScrapping (pUrl):
+	#requiere como parametro un url y retorna el codigo html de este url
 
 	try:
 		session = HTMLSession()
@@ -13,8 +16,10 @@ def webScrapping (pUrl):  # Requiere como parametro un url y retorna el codigo h
 		print("Revisar Conexion")
 	
 	
+	
 
-def AlmacenarTexto(pUrl, pNombreCiudad):  # Se almacena el texto obtenido en un archivo de texto ".txt"
+
+def AlmacenarTexto(pUrl, pNombreCiudad):
 	
 	nombreTexto = pNombreCiudad + ".txt"
 
@@ -22,7 +27,8 @@ def AlmacenarTexto(pUrl, pNombreCiudad):  # Se almacena el texto obtenido en un 
 		texto.write(webScrapping(pUrl))
 
 
-def limpiarTexto(pString):   # Se eliminan los caracteres innecesarios para facilitar la lectura del archivo
+def limpiarTexto(pString):
+
 
     pString= pString.replace("\n", "")
     pString = pString.replace(">", "")
@@ -31,8 +37,9 @@ def limpiarTexto(pString):   # Se eliminan los caracteres innecesarios para faci
     return pString
 
 
-def BuscadorTexto(pNombreCiudad, pStringBusqueda):   # Permite la lectura del texto en busca de los precios 
+def BuscadorTexto(pNombreCiudad, pStringBusqueda):
    
+
     archivo  = open (str(pNombreCiudad) + ".txt", "r")
     textoArchivo = archivo.read()
     lsIndicesI = []
@@ -43,7 +50,7 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):   # Permite la lectura del te
     encontrado = True
 
 
-    if pStringBusqueda == "from-price":			# "from-price" es la palabra anterior a el precio, por eso es el parametro de busqueda
+    if pStringBusqueda == "from-price":
         
         consLenPString = pStringBusqueda.__len__()
 
@@ -63,13 +70,15 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):   # Permite la lectura del te
 
             else:
 
-                # Se ejecuta cuando no hay más precios
+                #se ejecuta cuando no hay mas precios
                 break
         
         contador2 = 0
         for a in lsIndicesI:
             lsPrecios.append(textoArchivo[a + 2: lsIndicesF[contador2]])
             contador2 += 1
+
+   
         
         return lsPrecios
 
@@ -81,16 +90,20 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):   # Permite la lectura del te
         lsIndicesF.append(textoArchivo.find("<",  lsIndicesI[0]))
     
     
+
+    
         while encontrado:
             if textoArchivo.find(pStringBusqueda, lsIndicesI[contador] + consLenPString) != -1:
 
                 lsIndicesI.append(textoArchivo.find(pStringBusqueda, lsIndicesI[contador]) + consLenPString)
                 lsIndicesF.append(textoArchivo.find("<", lsIndicesI[contador + 1]))
-               
+                
+
+                
                 contador += 1
             else:
 
-                # Se ejecuta cuando no hay más precios
+                #se ejecuta cuando no hay mas precios
                 break
     
         contador2 = 0
@@ -105,10 +118,11 @@ def BuscadorTexto(pNombreCiudad, pStringBusqueda):   # Permite la lectura del te
     
         return lsPrecios
 
-    archivo.close()
-	
 
-def organizadorFechaPrecio(pNombreCiudad):  # Crea un diccionario con las horas y los precios
+
+    archivo.close()
+
+def organizadorFechaPrecio(pNombreCiudad):
 		
 		ListaTiempos = BuscadorTexto(pNombreCiudad, "class=\"time\"")
 		contador = 0
@@ -130,12 +144,27 @@ def organizadorFechaPrecio(pNombreCiudad):  # Crea un diccionario con las horas 
 
 		return diccionarioPrecios
 
-def almacenarHorasPrecios(pDiccionarioHorasPrecios, pCiudad):	#Se alamacena el valor dado en un documento especifico, no retorna nada
+def almacenarHorasPrecios(pDiccionarioHorasPrecios, pCiudad):
 	
+
+	#Se alamacena el valor dado en un documento especifico, no retorna nada
 	msg = ""
 	with open("Resultados" + pCiudad + ".txt", "a+") as archivo:
 
-		msg = str(pDiccionarioHorasPrecios) + time.ctime() +"\n ********************************************** \n" 
+		msg = str(pDiccionarioHorasPrecios) +"\n"
 		archivo.write(msg)
 	
+	
+	
+
+
+				
+	
+	
+	
+
+
+
+
+
 
