@@ -1,16 +1,14 @@
-
+""" Se crea un diccionario con las posibles ciudades, donde el nombre de la ciudad es la llave y la abreviación es el valor """
 posiblesCiudades = {"Arequipa": "AQP", "Barranquilla": "BAQ", "Bogota": "BOG", "Bucaramanga": "BGA",  "Cajamarca": "CJA", "Cartagena": "CTG", "Chiclayo": "CIX", "Cusco": "CUZ", "Cucuta" : "CUC,", "Iquitos": "IQT", "Jaen": "JAE", "Juliaca": "JUL", "Lima": "LIM", "Medellin": "MDE", "Miami": "MIA", "Monteria": "MTR", "Pereira": "PEI", "Piura": "PIU", "Rioacha": "RCH", "San Andres Islas": "ADZ", "Santa Marta": "SMR", "Tacna": "TCQ", "Talara": "TYl", "Tarapoto": "TPP", "Valledupar": "VUP"}
 
 
-def generarPrefijo(pNombre):
-	#Se encarga de generar un prefijo especifico para cada una de las ciudades
+def generarPrefijo(pNombre):  # Se encarga de generar un prefijo especifico para cada una de las ciudades
 	for a in posiblesCiudades.keys():
 		if a == pNombre:
 			return posiblesCiudades[a]
 
-def buscarEnCiudad(pCiudad):
-
-    #se introduce como parametreo la ciudas y se evalua con este metodo si existe
+def buscarEnCiudad(pCiudad):  # Se introduce como parametreo la ciudas y se evalua con este metodo si existe
+	
     encontrado = False
 
     for a in posiblesCiudades.keys():
@@ -18,17 +16,15 @@ def buscarEnCiudad(pCiudad):
         if a == pCiudad:
             encontrado = True
 
-
-
     return encontrado
 
-def checkDate(pFecha):
+def checkDate(pFecha):  # Revisa si la fecha se ingresó correctamente
 	
 	
 	anOk = False
 	mesOk = False
 	diaOk = False
-	#la fecha debe tener el siguiente formato 2019-10-25
+	# La fecha debe tener el siguiente formato AAAA-MM-DD
 	listaPartes = pFecha.split("-")
 	ano = int(listaPartes[0])
 	mes = int(listaPartes[1])
@@ -50,7 +46,7 @@ def checkDate(pFecha):
 
 
 
-def modificacionLink(pCiudadSalida, pCiudadDestino, pFechaSalida, pNumeroDePersonas):
+def modificacionLink(pCiudadSalida, pCiudadDestino, pFechaSalida, pNumeroDePersonas):  # modifica el link se Viva Air para realizar la busqueda de los datos ingresados
 
 	if buscarEnCiudad(pCiudadDestino):
 
@@ -66,5 +62,3 @@ def modificacionLink(pCiudadSalida, pCiudadDestino, pFechaSalida, pNumeroDePerso
 
 
 
-
-	
