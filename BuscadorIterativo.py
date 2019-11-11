@@ -9,7 +9,7 @@ ciudadesDestino = {"Barranquilla": [0,0], "Cartagena": [0,0], "Bucaramanga": [0,
 #ciudadesDestino = {"Barranquilla": [0,0]}
 #las fechas que se quiere revisar
 
-listaFechas = [10,11,12,13,14]
+listaFechas = [11,12,13,14]
 
 def repetirTresVeces(pFecha):
 
