@@ -3,17 +3,6 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from matplotlib.figure import Figure
 import TranformarPuntos 
 
-
-listaXBaq, listaYBaq = TranformarPuntos.main("ResultadosBAQ.txt")
-listaXCuz, listaYCuz = TranformarPuntos.main("ResultadosCUZ.txt")
-listaXCtg, listaYCtg = TranformarPuntos.main("ResultadosCTG.txt")
-listaXBga, listaYBga = TranformarPuntos.main("ResultadosBGA.txt")
-listaXAdz, listaYAdz = TranformarPuntos.main("ResultadosADZ.txt")
-listaXSmr, listaYSmr = TranformarPuntos.main("ResultadosSMR.txt")
-listaXVup, listaYVup = TranformarPuntos.main("ResultadosVUP.txt")
-
-
-
 ########################################## Ventana ###########################################
 
 """ Se crea la ventana con su respectivo titulo """
@@ -24,12 +13,17 @@ root.wm_title ("Analisis de vuelo")
 
 ################################# Grafico tipo scatter plot  #################################
 
-
 figure = Figure(figsize=(5, 4), dpi=100) # Dimenciones de la figura ((ancho,alto), escala)
 plot = figure.add_subplot(1, 1, 1) # Proporción
 
 """ Datos del grafico"""
-
+listaXBaq, listaYBaq = TranformarPuntos.main("ResultadosBAQ.txt")
+listaXCuz, listaYCuz = TranformarPuntos.main("ResultadosCUZ.txt")
+listaXCtg, listaYCtg = TranformarPuntos.main("ResultadosCTG.txt")
+listaXBga, listaYBga = TranformarPuntos.main("ResultadosBGA.txt")
+listaXAdz, listaYAdz = TranformarPuntos.main("ResultadosADZ.txt")
+listaXSmr, listaYSmr = TranformarPuntos.main("ResultadosSMR.txt")
+listaXVup, listaYVup = TranformarPuntos.main("ResultadosVUP.txt")
 
 # Barranquilla
 
@@ -55,12 +49,12 @@ y5 = listaYAdz
 # Santa Marta
 x6 = listaXSmr
 y6 = listaYSmr
+
 # Valledupar
 x7 = listaXVup
 y7 = listaYVup
 
 """ (Coordenadas X, Coordenadas Y, Color del punto, Marcador o tipo de punto, Etiqueta) """
-
 
 Brranquilla = plot.scatter(x1, y1, color="blue", marker="X", label = "Brranquilla")
 Cusco = plot.scatter(x2, y2, color="red", marker="D", label = "Cusco")
